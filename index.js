@@ -9,10 +9,12 @@ app.use(cors());
 
 app.use(express.json());
 
-app.get("/api", async (req, res) => {
+app.post("/api", async (req, res) => {
   try {
     const { url } = req.body;
+
     console.log(url);
+
     const response = await fetch(url, {
       headers: {
         "Content-Type": "application/json",
@@ -21,7 +23,6 @@ app.get("/api", async (req, res) => {
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
       },
     });
-    console.log(response);
 
     if (!response.ok) {
       throw new Error(`Error fetching data: ${response.statusText}`);
